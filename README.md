@@ -61,5 +61,5 @@ npm run dev
 **Panagiotis Trypos**
 
 * [Website / Portfolio](https://ptrypos.me)
-* [GitHub Profile](https://www.google.com/search?q=https://github.com/ptrypos)
-* [LinkedIn](https://www.google.com/search?q=https://www.linkedin.com/in/%CF%80%CE%B1%CE%BD%CE%B1%CE%B3%CE%B9%CF%8E%CF%84%CE%B7%CF%82-%CF%84%CF%81%CF%8D%CF%80%CE%BF%CF%82-983abb242)
+* [GitHub Profile](https://github.com/ptrypos)
+* [LinkedIn](https://www.linkedin.com/in/%CF%80%CE%B1%CE%BD%CE%B1%CE%B3%CE%B9%CF%8E%CF%84%CE%B7%CF%82-%CF%84%CF%81%CF%8D%CF%80%CE%BF%CF%82-983abb242)
