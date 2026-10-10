@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Pro Gaming Headset",
+        "price": 149.99,
+        "description": "Premium wireless headset featuring a highly durable retractable microphone and immersive surround sound.",
+        "category": "Electronics",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Gaming+Headset"
+    },
+    {
+        "id": 2,
+        "title": "4K Wireless Streaming Dongle",
+        "price": 49.99,
+        "description": "Cast your favorite movies and shows directly to your TV. Features a highly stable Wi-Fi receiver for uninterrupted viewing.",
+        "category": "Electronics",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Cast+Dongle"
+    },
+    {
+        "id": 3,
+        "title": "Universal Bike Computer",
+        "price": 29.99,
+        "description": "Track speed and distance with precision. Fully programmable for any wheel circumference and ETRTO standards. Perfect for static gym bicycles or road bikes.",
+        "category": "Fitness",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Bike+Computer"
+    },
+    {
+        "id": 4,
+        "title": "Tough Bone Puppy Chew Toy",
+        "price": 12.50,
+        "description": "Indestructible rubber bone designed specifically to soothe teething puppies and redirect them away from chewing household items.",
+        "category": "Pet Supplies",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Puppy+Toy"
+    },
+    {
+        "id": 5,
+        "title": "Pirate King Manga Box Set",
+        "price": 89.99,
+        "description": "Begin the epic ocean journey with this comprehensive box set of the legendary manga's first major arc.",
+        "category": "Books",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Manga+Set"
+    },
+    {
+        "id": 6,
+        "title": "Winter Fantasy Epic DVD Set",
+        "price": 34.99,
+        "description": "Experience the legendary first season that introduced the world to dragons, direwolves, and the terrifying white walkers.",
+        "category": "Entertainment",
+        "image": "https://placehold.co/400x400/eeeeee/31343c?text=Fantasy+DVD"
+    }
+]
