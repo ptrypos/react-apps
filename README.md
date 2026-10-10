@@ -2,7 +2,7 @@
 
 A responsive single-page application (SPA) built with React and React Router. This project serves as a portfolio hub to seamlessly showcase and navigate between various frontend applications, demonstrating client-side routing, component-based architecture, and complex state management.
 
-**🌍 [Live Demo**](https://react-apps-one-eta.vercel.app/)
+**🌍 [Live Demo](https://react-apps-one-eta.vercel.app/) **
 
 ## 🚀 Featured Applications
 
