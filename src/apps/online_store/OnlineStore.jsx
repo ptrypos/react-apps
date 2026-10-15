@@ -43,6 +43,7 @@ function OnlineStore() {
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
     const [productsInCart, setProductsInCart] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const filteredProducts = selectedCategories.length === 0
         ? products
@@ -154,8 +155,14 @@ function OnlineStore() {
 
             <div className='store-workspace'>
                 <aside className="filter-sidebar">
-                    <h3>Categories</h3>
-                    <div className="filter-options">
+                    <div className="filter-header" onClick={() => setIsFilterOpen(!isFilterOpen)}>
+                        <h3>Categories</h3>
+                        <span className="filter-toggle-icon">
+                            {isFilterOpen ? '▲' : '▼'}
+                        </span>
+                    </div>
+
+                    <div className={`filter-options ${isFilterOpen ? 'open' : ''}`}>
                         {uniqueCategories.map((category) => (
                             <label key={category} className="filter-label">
                                 <input

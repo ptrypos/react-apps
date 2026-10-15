@@ -5,7 +5,7 @@
     padding: 1rem 2rem;
     background-color: #ffffff;
     border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .back-button {
@@ -147,7 +147,7 @@ h4.product-cart-title {
     color: #212529;
 }
 
-.product-cart-id, 
+.product-cart-id,
 .product-cart-category {
     grid-column: 2 / 3;
     font-size: 0.75rem;
@@ -255,13 +255,29 @@ h4.product-cart-title {
     gap: 2rem;
 }
 
-.filter-sidebar h3 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    color: #212529;
+/* --- Filter Header Styles --- */
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 2px solid #e0e0e0;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
+}
+
+.filter-header h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #212529;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.filter-toggle-icon {
+    display: none;
+    font-size: 0.8rem;
+    color: #495057;
 }
 
 .filter-options {
@@ -371,4 +387,54 @@ h4.product-cart-title {
 
 .add-to-cart-btn:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .store-workspace {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .filter-sidebar {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .filter-header {
+        margin-bottom: 0;
+        border-bottom: none;
+        cursor: pointer;
+    }
+
+    .filter-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .filter-toggle-icon {
+        display: block;
+    }
+
+    .filter-options {
+        display: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .filter-options.open {
+        display: flex;
+    }
+
+    .cart-sidebar {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .product-in-cart {
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
 }
