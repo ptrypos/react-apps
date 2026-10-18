@@ -98,7 +98,7 @@ function MovieDetails() {
                                 </span>
                             ))}
                         </div>
-                        
+
                         <h3>Where to Watch</h3>
                         <div className='details-watch-providers'>
                             {streamingServices.length > 0 ? (
@@ -145,10 +145,10 @@ function MovieDetails() {
                             {topCast.map((actor) => (
                                 <div key={actor.id} className='cast-card'>
                                     {actor.profile_path ? (
-                                        <img 
-                                            src={`${IMAGE_BASE_URL}${actor.profile_path}`} 
-                                            alt={actor.name} 
-                                            className='cast-img' 
+                                        <img
+                                            src={`${IMAGE_BASE_URL}${actor.profile_path}`}
+                                            alt={actor.name}
+                                            className='cast-img'
                                             loading='lazy'
                                         />
                                     ) : (
@@ -192,24 +192,25 @@ function MovieDiscovery() {
                     const searchData = await searchRes.json();
                     setMovies(searchData.results || []);
                 } else {
-                    const [nowPlayingResponse, upcomingMoviesResponse] = await Promise.all([
-                        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`, { signal: controller.signal }),
-                        fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`, { signal: controller.signal })
-                    ]);
+                    const today = new Date();
+                    const todayString = today.toISOString().split('T')[0];
 
-                    if (!nowPlayingResponse.ok || !upcomingMoviesResponse.ok) {
-                        throw new Error("Failed to load featured movies");
-                    }
+                    const threeMonthsAgo = new Date(today);
+                    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+                    const pastString = threeMonthsAgo.toISOString().split('T')[0];
 
-                    const upcomingData = await upcomingMoviesResponse.json();
-                    const nowPlayingData = await nowPlayingResponse.json();
-
-                    const combined = [...nowPlayingData.results, ...upcomingData.results];
-                    const uniqueMovies = Array.from(
-                        new Map(combined.map(movie => [movie.id, movie])).values()
+                    const releasedRes = await fetch(
+                        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&page=1&primary_release_date.gte=${pastString}&primary_release_date.lte=${todayString}&sort_by=popularity.desc`,
+                        { signal: controller.signal }
                     );
 
-                    setMovies(uniqueMovies);
+                    if (!releasedRes.ok) {
+                        throw new Error("Failed to load movies");
+                    }
+
+                    const releasedData = await releasedRes.json();
+
+                    setMovies(releasedData.results || []);
                 }
             } catch (err) {
                 if (err.name !== 'AbortError') {
@@ -241,10 +242,10 @@ function MovieDiscovery() {
             </nav>
 
             <div className='search-bar-wrapper'>
-                <input 
+                <input
                     type="text"
                     className="movie-search-input"
-                    placeholder="Search any movie..." 
+                    placeholder="Search any movie..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
