@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Link, useParams } from 'react-router-dom'
 import './MovieSearchExplorer.css'
 
-const API_KEY = import.meta.env.TMDB_API_KEY;
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 function MovieContainer({ movie }) {
@@ -37,7 +37,6 @@ function MovieDetails() {
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                // Notice: appended watch/providers
                 const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits,watch/providers`);
                 if (!res.ok) throw new Error("Could not find movie details");
                 const data = await res.json();
@@ -59,7 +58,6 @@ function MovieDetails() {
     const hasPoster = Boolean(movie.poster_path && movie.poster_path.trim());
     const topCast = movie.credits?.cast?.slice(0, 10) || [];
 
-    // Select provider region (e.g., US or your preferred ISO-3166-1 country code)
     const providers = movie['watch/providers']?.results?.US;
     const streamingServices = providers?.flatrate || [];
     const rentServices = providers?.rent || [];
