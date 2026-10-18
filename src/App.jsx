@@ -6,6 +6,7 @@ import MovieSearchExplorer from './apps/movie_search/MovieSearchExplorer';
 import randomQuoteImage from './apps/random_quote_generator/display.png';
 import todoImage from './apps/todo_list/display.png';
 import onlineStoreImage from './apps/online_store/display.png'
+import movieSearchExplorerImage from './apps/movie_search/display.png';
 import './App.css'
 
 function Container({ title, description, image, imageAlt, linkToApp }) {
@@ -43,8 +44,8 @@ function Dashboard() {
         },
         {
             title: 'Movie Search Explorer',
-            description: '',
-            image: '',
+            description: 'A responsive movie discovery and search application powered by the TMDB API, featuring real-time debounced search, synchronized now-playing and upcoming feeds, and detailed single-page routing. Demonstrates asynchronous REST API integration, dynamic data deduplication, and rich media presentation including streaming availability, cast profiles, and studio metadata.',
+            image: movieSearchExplorerImage,
             imageAlt: 'A preview of the movie search explorer.',
             linkToApp: '/movie_search'
         }
@@ -73,6 +74,7 @@ function App() {
             <Route path='/todo_list' element={<ToDoList />} />
             <Route path='/online_store' element={<OnlineStore />} />
             <Route path='/movie_search' element={<MovieSearchExplorer />} />
+            <Route path="/movie_search/*" element={<MovieSearchExplorer />} />
         </Routes>
     );
 }
