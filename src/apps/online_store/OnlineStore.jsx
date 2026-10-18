@@ -113,7 +113,7 @@ function OnlineStore() {
         <div>
             <nav className='nav-bar'>
                 <Link to='/' className='back-button'>
-                    ← Back to Dashboard
+                    &larr; Back to Dashboard
                 </Link>
                 <h2 className='nav-title'>Online Store</h2>
 

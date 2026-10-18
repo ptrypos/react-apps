@@ -3,10 +3,12 @@ import RandomQuoteGenerator from './apps/random_quote_generator/RandomQuoteGener
 import ToDoList from './apps/todo_list/ToDoList';
 import OnlineStore from './apps/online_store/OnlineStore'
 import MovieSearchExplorer from './apps/movie_search/MovieSearchExplorer';
+import ManageFormInputs from './apps/handle_form_inputs/HandleFormInputs';
 import randomQuoteImage from './apps/random_quote_generator/display.png';
 import todoImage from './apps/todo_list/display.png';
 import onlineStoreImage from './apps/online_store/display.png'
 import movieSearchExplorerImage from './apps/movie_search/display.png';
+import handleFormInputsImage from './apps/handle_form_inputs/display.png';
 import './App.css'
 
 function Container({ title, description, image, imageAlt, linkToApp }) {
@@ -44,10 +46,17 @@ function Dashboard() {
         },
         {
             title: 'Movie Search Explorer',
-            description: 'A responsive movie discovery and search application powered by the TMDB API, featuring real-time debounced search, synchronized now-playing and upcoming feeds, and detailed single-page routing. Demonstrates asynchronous REST API integration, dynamic data deduplication, and rich media presentation including streaming availability, cast profiles, and studio metadata.',
+            description: 'A TMDB-powered application demonstrating REST API integration, debounced search state, and dynamic data presentation.',
             image: movieSearchExplorerImage,
             imageAlt: 'A preview of the movie search explorer.',
             linkToApp: '/movie_search'
+        },
+        {
+            title: 'Handle Form Inputs',
+            description: 'A responsive React registration form featuring real-time password strength tracking, live field validation, and smooth in-page feedback for a seamless user onboarding experience.',
+            image: handleFormInputsImage,
+            imageAlt: 'A preview of the handle form inputs.',
+            linkToApp: '/handle_form_inputs'
         }
     ]
 
@@ -74,7 +83,8 @@ function App() {
             <Route path='/todo_list' element={<ToDoList />} />
             <Route path='/online_store' element={<OnlineStore />} />
             <Route path='/movie_search' element={<MovieSearchExplorer />} />
-            <Route path="/movie_search/*" element={<MovieSearchExplorer />} />
+            <Route path='/movie_search/*' element={<MovieSearchExplorer />} />
+            <Route path='/handle_form_inputs' element={<ManageFormInputs />} />
         </Routes>
     );
 }
