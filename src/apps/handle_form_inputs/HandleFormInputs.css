@@ -195,3 +195,10 @@
 .submit-btn:hover {
     background-color: #4338ca;
 }
+
+.submit-btn:disabled {
+    background-color: #9ca3af;
+    color: #f3f4f6;
+    cursor: not-allowed;
+    box-shadow: none;
+}

@@ -224,7 +224,19 @@ function HandleFormInputs() {
                         </div>
                     </div>
 
-                    <button type='submit' className='submit-btn'>Register</button>
+                    <button
+                        type='submit'
+                        className='submit-btn'
+                        disabled={
+                            Object.keys(fieldErrors).length > 0 ||
+                            !username ||
+                            !email ||
+                            !password ||
+                            !confirmPassword
+                        }
+                    >
+                        Register
+                    </button>
                 </form>
             </div>
         </div>
