@@ -14,7 +14,7 @@ import './App.css'
 function Container({ title, description, image, imageAlt, linkToApp }) {
     return (
         <Link to={linkToApp} className='project'>
-            <img src={image} alt={imageAlt}/>
+            <img src={image} alt={imageAlt} />
             <h3>{title}</h3>
             <p>{description}</p>
         </Link>
@@ -76,13 +76,12 @@ function Dashboard() {
 }
 
 function App() {
-    return(
+    return (
         <Routes>
-            <Route path='/' element={<Dashboard />}/>
+            <Route path='/' element={<Dashboard />} />
             <Route path='/quote' element={<RandomQuoteGenerator />} />
             <Route path='/todo_list' element={<ToDoList />} />
             <Route path='/online_store' element={<OnlineStore />} />
-            <Route path='/movie_search' element={<MovieSearchExplorer />} />
             <Route path='/movie_search/*' element={<MovieSearchExplorer />} />
             <Route path='/handle_form_inputs' element={<ManageFormInputs />} />
         </Routes>

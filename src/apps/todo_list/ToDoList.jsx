@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ToDoList.css'
 
@@ -10,7 +10,7 @@ function ToDoList() {
         if (item.trim() === "") return;
         
         const newTask = {
-            id: Date.now(),
+            id: crypto.randomUUID(),
             text: item,
             completed: false
         };

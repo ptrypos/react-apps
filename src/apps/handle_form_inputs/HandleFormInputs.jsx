@@ -6,7 +6,10 @@ function HandleFormInputs() {
     const [globalMessage, setGlobalMessage] = useState(null);
     const [isGlobalMessageAnError, setIsGlobalMessageAnError] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordShow, setPasswordShow] = useState(false);
     const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
 
@@ -18,53 +21,62 @@ function HandleFormInputs() {
         setConfirmPasswordShow((prev) => !prev);
     }
 
-    const validateUsername = (username) => {
+    const checkUsernameCharacters = (username) => {
         return /^[a-zA-Z0-9_-]{3,16}$/.test(username);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleUsernameChange = (e) => {
+        const newUsername = e.target.value;
+        setUsername(newUsername);
 
-        setGlobalMessage(null);
-        setIsGlobalMessageAnError(false);
-        setFieldErrors({});
-
-        const formData = new FormData(e.target);
-        const username = formData.get('username');
-        const email = formData.get('email');
-        const confirmPassword = formData.get('confirmPassword');
-
-        let errors = {};
-
-        if (!validateUsername(username)) {
-            errors.username = "Username must be 3 - 16 characters. Only letters, numbers, underscores, and hyphens are allowed.";
+        if (newUsername.length > 0 && ((newUsername.length < 3 || newUsername > 16) || !checkUsernameCharacters(newUsername))) {
+            setFieldErrors(prev => ({
+                ...prev,
+                username: "Username must be 3 - 16 characters. Only letters, numbers, underscores, and hyphens are allowed."
+            }));
+        } else {
+            setFieldErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors.username;
+                return newErrors;
+            });
         }
-        
-        if (email === "") {
-            errors.email = "Please enter an email address."
-        } else if (!email.includes('@')) {
-            errors.email = "Please enter a valid email address.";
-        }
-        
-        if (password.length < 6) {
-            errors.password = "Password must be at least 6 characters.";
-        }
+    }
 
-        if (Object.keys(errors).length > 0) {
-            setFieldErrors(errors);
-            return;
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+
+        if (newEmail.length > 0 && !newEmail.includes('@')) {
+            setFieldErrors(prev => ({
+                ...prev,
+                email: "Please enter a valid email address."
+            }));
+        } else {
+            setFieldErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors.email;
+                return newErrors;
+            });
         }
+    }
 
-        if (password !== confirmPassword) {
-            setGlobalMessage("Your passwords do not match. Please try again.");
-            setIsGlobalMessageAnError(true);
-            return;
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+
+        if (newPassword.length > 0 && newPassword.length < 6) {
+            setFieldErrors(prev => ({
+                ...prev,
+                password: "Password must be at least 6 characters."
+            }));
+        } else {
+            setFieldErrors(prev => {
+                const newErrors = { ...prev };
+                delete newErrors.password;
+                return newErrors;
+            });
         }
-
-        setGlobalMessage("Form submitted successfully locally! No actual account was created.");
-
-        e.target.reset();
-        setPassword('');
     };
 
     const calculateScore = (pwd) => {
@@ -88,6 +100,48 @@ function HandleFormInputs() {
 
     const { text, class: strengthClass } = getStrengthInfo(score);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setGlobalMessage(null);
+        setIsGlobalMessageAnError(false);
+        setFieldErrors({});
+
+        let errors = {};
+
+        if (!checkUsernameCharacters(username)) {
+            errors.username = "Username must be 3 - 16 characters. Only letters, numbers, underscores, and hyphens are allowed.";
+        }
+
+        if (email === "") {
+            errors.email = "Please enter an email address.";
+        } else if (!email.includes('@')) {
+            errors.email = "Please enter a valid email address.";
+        }
+
+        if (password.length < 6) {
+            errors.password = "Password must be at least 6 characters.";
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setGlobalMessage("Your passwords do not match. Please try again.");
+            setIsGlobalMessageAnError(true);
+            return;
+        }
+
+        setGlobalMessage("Form submitted successfully locally! No actual account was created.");
+
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+    };
+
     return (
         <div className='page-container'>
             <nav className='nav-bar'>
@@ -108,7 +162,9 @@ function HandleFormInputs() {
                             name='username'
                             className={`char-input ${fieldErrors.username ? 'input-error' : ''}`}
                             type='text'
-                            placeholder='Choose a username' />
+                            placeholder='Choose a username'
+                            value={username}
+                            onChange={handleUsernameChange} />
                         {fieldErrors.username && <span className='field-error-text'>{fieldErrors.username}</span>}
                     </div>
 
@@ -118,7 +174,9 @@ function HandleFormInputs() {
                             name='email'
                             className={`char-input ${fieldErrors.email ? 'input-error' : ''}`}
                             type='email'
-                            placeholder='name@example.com' />
+                            placeholder='name@example.com'
+                            value={email}
+                            onChange={handleEmailChange} />
                         {fieldErrors.email && <span className='field-error-text'>{fieldErrors.email}</span>}
                     </div>
 
@@ -131,10 +189,10 @@ function HandleFormInputs() {
                                 type={passwordShow ? 'text' : 'password'}
                                 placeholder='Create a password'
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)} />
-                            <button 
-                                type='button' 
-                                className='toggle-visibility-btn' 
+                                onChange={handlePasswordChange} />
+                            <button
+                                type='button'
+                                className='toggle-visibility-btn'
                                 onClick={togglePasswordShow}>
                                 {passwordShow ? 'Hide' : 'Show'}
                             </button>
@@ -154,10 +212,12 @@ function HandleFormInputs() {
                                 name='confirmPassword'
                                 className={`char-input ${isGlobalMessageAnError ? 'input-error' : ''}`}
                                 type={confirmPasswordShow ? 'text' : 'password'}
-                                placeholder='Confirm password' />
-                            <button 
-                                type='button' 
-                                className='toggle-visibility-btn' 
+                                placeholder='Confirm password'
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <button
+                                type='button'
+                                className='toggle-visibility-btn'
                                 onClick={toggleConfirmPasswordShow}>
                                 {confirmPasswordShow ? 'Hide' : 'Show'}
                             </button>
