@@ -132,6 +132,16 @@
     text-align: center;
 }
 
+.message-display {
+    background-color: #d1fae5;
+    color: #065f46;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
 .field-error-text {
     color: #ef4444;
     font-size: 0.75rem;

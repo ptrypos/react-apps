@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import './HandleFormInputs.css';
 
 function HandleFormInputs() {
-    const [globalError, setGlobalError] = useState(null);
+    const [globalMessage, setGlobalMessage] = useState(null);
+    const [isGlobalMessageAnError, setIsGlobalMessageAnError] = useState(false);
     const [fieldErrors, setFieldErrors] = useState({});
     const [password, setPassword] = useState('');
     const [passwordShow, setPasswordShow] = useState(false);
@@ -24,7 +25,8 @@ function HandleFormInputs() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setGlobalError(null);
+        setGlobalMessage(null);
+        setIsGlobalMessageAnError(false);
         setFieldErrors({});
 
         const formData = new FormData(e.target);
@@ -54,11 +56,12 @@ function HandleFormInputs() {
         }
 
         if (password !== confirmPassword) {
-            setGlobalError("Your passwords do not match. Please try again.");
+            setGlobalMessage("Your passwords do not match. Please try again.");
+            setIsGlobalMessageAnError(true);
             return;
         }
 
-        alert("Account created successfully!");
+        setGlobalMessage("Form submitted successfully locally! No actual account was created.");
 
         e.target.reset();
         setPassword('');
@@ -97,7 +100,7 @@ function HandleFormInputs() {
                 <form className='user-form' onSubmit={handleSubmit} noValidate>
                     <h3 className='form-title'>Create Account</h3>
 
-                    {globalError && <div className='error-display'>{globalError}</div>}
+                    {globalMessage && <div className={isGlobalMessageAnError ? "error-display" : "message-display"}>{globalMessage}</div>}
 
                     <div className='input-group'>
                         <label htmlFor='username' className='input-label'>Username</label>
@@ -149,7 +152,7 @@ function HandleFormInputs() {
                         <div className='password-input-wrapper'>
                             <input id='confirmPassword'
                                 name='confirmPassword'
-                                className={`char-input ${globalError ? 'input-error' : ''}`}
+                                className={`char-input ${isGlobalMessageAnError ? 'input-error' : ''}`}
                                 type={confirmPasswordShow ? 'text' : 'password'}
                                 placeholder='Confirm password' />
                             <button 
